@@ -82,7 +82,6 @@ module.exports = function (config) {
         strictFilters: false,
         dynamicPartials: false,
     });
-    config.addPlugin(UpgradeHelper);
 
     // Base Config
     return {
