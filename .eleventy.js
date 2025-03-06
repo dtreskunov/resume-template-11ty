@@ -1,4 +1,3 @@
-const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
 const pluginRss = require('@11ty/eleventy-plugin-rss')
 const markdownIt = require('markdown-it')
 
