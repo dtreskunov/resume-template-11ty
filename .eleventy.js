@@ -1,3 +1,4 @@
+const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
 const pluginRss = require('@11ty/eleventy-plugin-rss')
 const markdownIt = require('markdown-it')
 
@@ -75,6 +76,13 @@ module.exports = function (config) {
 
     // Deep-Merge
     config.setDataDeepMerge(true)
+
+    // Migrate to Eleventy v1
+    config.setLiquidOptions({
+        strictFilters: false,
+        dynamicPartials: false,
+    });
+    config.addPlugin(UpgradeHelper);
 
     // Base Config
     return {
