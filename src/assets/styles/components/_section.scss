@@ -1,19 +1,22 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .section {
-    padding-top: $spacing-y;
-    padding-bottom: $spacing-y;
+    padding-top: variables.$spacing-y;
+    padding-bottom: variables.$spacing-y;
     page-break-inside: avoid;
 
     &__title {
-        margin-bottom: $spacing-y;
+        margin-bottom: variables.$spacing-y;
         padding-bottom: 0.5rem;
-        border-bottom: 1px solid $gray;
+        border-bottom: 1px solid variables.$gray;
     }
 }
 
 .grid .section {
     grid-column: span 2;
 
-    @include mq(md, true) {
+    @include mixins.mq(md, true) {
         &--half {
             grid-column: span 1;
         }

@@ -1,3 +1,5 @@
+@use "../utils/variables";
+
 // Reboot
 //
 // Global resets to common HTML elements and more for easier usage by Bootstrap.
@@ -69,20 +71,20 @@ html {
 
 html {
     // Sets a specific default `font-size` for user with `rem` type scales.
-    font-size: $font-size-root;
+    font-size: variables.$font-size-root;
     // Changes the default tap highlight to be completely transparent in iOS.
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
     // Make the `body` use the `font-size-root`
-    font-family: $font-family-base;
-    font-size: $font-size-base;
-    line-height: $line-height;
+    font-family: variables.$font-family-base;
+    font-size: variables.$font-size-base;
+    line-height: variables.$line-height;
 
-    color: $text-color;
-    color: var(--text-color, $text-color);
-    background-color: $bg-color;
+    color: variables.$text-color;
+    color: var(--text-color, variables.$text-color);
+    background-color: variables.$bg-color;
 
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -234,12 +236,12 @@ input[type='search'] {
 }
 
 ::selection {
-    background: $primary-color;
-    background: var(--primary-color, $primary-color);
+    background: variables.$primary-color;
+    background: var(--primary-color, variables.$primary-color);
     color: #fff;
 }
 ::-moz-selection {
-    background: $primary-color;
-    background: var(--primary-color, $primary-color);
+    background: variables.$primary-color;
+    background: var(--primary-color, variables.$primary-color);
     color: #fff;
 }

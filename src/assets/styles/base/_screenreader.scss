@@ -1,19 +1,22 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 //
 // Screenreaders
 //
 
 .sr-only {
-    @include sr-only();
+    @include mixins.sr-only();
 }
 
 .sr-only-focusable {
-    @include sr-only-focusable();
+    @include mixins.sr-only-focusable();
 }
 
 .sr-skip-link {
-    @include sr-only();
-    @include sr-only-focusable();
-    font-family: $font-family-sans-serif;
+    @include mixins.sr-only();
+    @include mixins.sr-only-focusable();
+    font-family: variables.$font-family-sans-serif;
 
     &:focus {
         position: absolute;
@@ -22,7 +25,7 @@
         top: 0;
         font-size: 1rem;
         transform: translateX(-50%);
-        background-color: $gray-darkest;
+        background-color: variables.$gray-darkest;
         color: #fff;
         border-radius: 0 0 0.5rem 0.5rem;
         padding: 1rem 1.5rem;

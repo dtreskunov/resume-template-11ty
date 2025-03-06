@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 h1,
 h2,
 h3,
@@ -6,7 +9,7 @@ h5,
 h6 {
     margin: 0;
     line-height: 1.2;
-    font-family: $font-family-serif;
+    font-family: variables.$font-family-serif;
     font-weight: 500;
     text-rendering: optimizeLegibility;
 }
@@ -15,7 +18,7 @@ h1 {
     font-size: 3.5rem;
     line-height: 1;
 
-    @include mq(lg) {
+    @include mixins.mq(lg) {
         font-size: 4.5rem;
     }
 }
@@ -37,10 +40,10 @@ a {
     text-decoration-skip-ink: auto;
     text-decoration-thickness: from-font;
 
-    color: $primary-color;
-    color: var(--primary-color, $primary-color);
+    color: variables.$primary-color;
+    color: var(--primary-color, variables.$primary-color);
 
-    @include hover-focus {
+    @include mixins.hover-focus {
         text-decoration: underline;
     }
 }
@@ -51,7 +54,7 @@ a {
     line-height: 1.5;
     max-width: 60ch;
 
-    @include mq(md) {
+    @include mixins.mq(md) {
         font-size: 1.5rem;
     }
 }

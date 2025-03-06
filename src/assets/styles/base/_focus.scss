@@ -1,3 +1,5 @@
+@use "../utils/variables";
+
 // =================
 // DEFAULT FOCUS STYLES
 // =================
@@ -5,8 +7,8 @@
 a:focus,
 button:focus,
 input:focus {
-    outline: 5px solid $secondary-color;
-    outline: 5px solid var(--secondary-color, $secondary-color);
+    outline: 5px solid variables.$secondary-color;
+    outline: 5px solid var(--secondary-color, variables.$secondary-color);
 }
 
 // =================

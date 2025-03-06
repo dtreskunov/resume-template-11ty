@@ -1,3 +1,5 @@
+@use "../utils/variables";
+
 .bulletlist {
     list-style: none;
     padding-left: 1.5em;
@@ -11,8 +13,8 @@
             width: 0.5em;
             height: 0.5em;
             border-radius: 50%;
-            background-color: $secondary-color;
-            background-color: var(--secondary-color, $secondary-color);
+            background-color: variables.$secondary-color;
+            background-color: var(--secondary-color, variables.$secondary-color);
             transform: translate(-50%, 20%);
             position: absolute;
             top: 0.5em;

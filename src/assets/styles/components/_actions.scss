@@ -1,9 +1,11 @@
+@use "../utils/mixins";
+
 .actions {
     display: flex;
     justify-content: center;
 
     &__btn {
-        @include button-reset;
+        @include mixins.button-reset;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -14,12 +16,12 @@
         border-radius: 50%;
         color: #fff;
 
-        @include hover-focus {
+        @include mixins.hover-focus {
             background-color: rgba(0, 0, 0, 0.25);
         }
     }
 
-    @include mq(lg) {
+    @include mixins.mq(lg) {
         display: none;
         flex-direction: column;
         position: fixed;

@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 // Main Site Layout
 
 body {
@@ -11,23 +14,23 @@ body {
 
     .header {
         grid-area: header;
-        padding: $spacing-y 0;
+        padding: variables.$spacing-y 0;
     }
     .main {
         grid-area: main;
     }
     .sidebar {
         grid-area: sidebar;
-        background-color: $primary-color;
-        background-color: var(--primary-color, $primary-color);
+        background-color: variables.$primary-color;
+        background-color: var(--primary-color, variables.$primary-color);
     }
     .footer {
         grid-area: footer;
-        padding: $spacing-y 0;
-        background-color: $gray-light;
+        padding: variables.$spacing-y 0;
+        background-color: variables.$gray-light;
     }
 
-    @include mq(lg) {
+    @include mixins.mq(lg) {
         display: grid;
         grid-template-columns: 25% 1fr;
         grid-template-rows: auto 1fr auto;
@@ -41,9 +44,9 @@ body {
 .container {
     padding-left: 5%;
     padding-right: 5%;
-    max-width: $container-max-width;
+    max-width: variables.$container-max-width;
 
-    @include mq(lg) {
+    @include mixins.mq(lg) {
         padding-left: 7%;
         padding-right: 7%;
     }
@@ -51,7 +54,7 @@ body {
 
 .grid {
     display: grid;
-    column-gap: $spacing-x * 2;
+    column-gap: variables.$spacing-x * 2;
     page-break-inside: avoid;
 
     &--2col {

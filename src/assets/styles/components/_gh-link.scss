@@ -1,5 +1,7 @@
+@use "../utils/mixins";
+
 .gh-link {
-    @include mq(lg) {
+    @include mixins.mq(lg) {
         display: block;
         position: fixed;
         top: 0;

@@ -1,10 +1,13 @@
+@use "../utils/mixins";
+@use "bulletlist";
+
 .markdown {
     > * + * {
         margin-top: 1rem;
     }
 
     a {
-        @include hyphenate;
+        @include mixins.hyphenate;
     }
 
     img {
