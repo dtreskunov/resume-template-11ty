@@ -1,11 +1,11 @@
-const Cache = require('@11ty/eleventy-cache-assets')
-const orderBy = require('lodash/orderBy')
+import Cache from '@11ty/eleventy-cache-assets'
+import lodash from 'lodash'
 
 // if you want to display your most starred github repositories,
 // change this to your username. if not, set it to false.
 const YOUR_GITHUB_USERNAME = 'maxboeck'
 
-module.exports = async function () {
+export default async function () {
     if (!YOUR_GITHUB_USERNAME) {
         return []
     }
@@ -19,7 +19,7 @@ module.exports = async function () {
                 type: 'json'
             }
         )
-        return orderBy(repos, 'stargazers_count', 'desc')
+        return lodash.orderBy(repos, 'stargazers_count', 'desc')
     } catch (e) {
         console.log('Failed fetching GitHub repos')
         return []

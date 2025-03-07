@@ -4,14 +4,19 @@
 // main entry point name
 const ENTRY_FILE_NAME = 'main.js'
 
-const fs = require('fs')
-const path = require('path')
-const webpack = require('webpack')
-const { fs: mfs } = require('memfs')
+import fs from 'fs'
+import path from 'path'
+import webpack from 'webpack'
+import mfs from 'memfs'
 
 const isProd = process.env.ELEVENTY_ENV === 'production'
 
-module.exports = class {
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default class {
     // Configure Webpack in Here
     async data() {
         const entryPath = path.join(__dirname, `/${ENTRY_FILE_NAME}`)

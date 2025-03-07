@@ -1,12 +1,12 @@
-const pluginRss = require('@11ty/eleventy-plugin-rss')
-const markdownIt = require('markdown-it')
+import pluginRss from '@11ty/eleventy-plugin-rss'
+import markdownIt from 'markdown-it'
 
-const filters = require('./utils/filters.js')
-const transforms = require('./utils/transforms.js')
-const shortcodes = require('./utils/shortcodes.js')
-const iconsprite = require('./utils/iconsprite.js')
+import * as filters from './utils/filters.js'
+import * as transforms from './utils/transforms.js'
+import * as shortcodes from './utils/shortcodes.js'
+import iconsprite from './utils/iconsprite.js'
 
-module.exports = function (config) {
+export default async function (config) {
     // Plugins
     config.addPlugin(pluginRss)
 
@@ -21,8 +21,8 @@ module.exports = function (config) {
     })
 
     // Shortcodes
-    Object.keys(shortcodes).forEach((shortcodeName) => {
-        config.addShortcode(shortcodeName, shortcodes[shortcodeName])
+    Object.entries(shortcodes).forEach(([shortcodeName, func]) => {
+        config.addShortcode(shortcodeName, func)
     })
 
     // Icon Sprite

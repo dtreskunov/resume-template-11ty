@@ -1,5 +1,3 @@
-module.exports = {
-    env: process.env.ELEVENTY_ENV,
-    demo: process.env.DEMO || false,
-    timestamp: new Date()
-}
+export const env = process.env.ELEVENTY_ENV;
+export const demo = process.env.DEMO || false;
+export const timestamp = new Date();
