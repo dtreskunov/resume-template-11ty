@@ -1,8 +1,10 @@
+@use '../utils/variables';
+
 @font-face {
     font-family: 'Butler';
     font-style: normal;
     font-display: swap;
     font-weight: 500;
-    src: url('/assets/fonts/butler-medium.woff2') format('woff2'),
-        url('/assets/fonts/butler-medium.woff') format('woff');
+    src: url(variables.$pathPrefix + '/assets/fonts/butler-medium.woff2') format('woff2'),
+        url(variables.$pathPrefix + '/assets/fonts/butler-medium.woff') format('woff');
 }
