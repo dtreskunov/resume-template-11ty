@@ -1,3 +1,4 @@
+import { EleventyHtmlBasePlugin } from '@11ty/eleventy'
 import pluginRss from '@11ty/eleventy-plugin-rss'
 import markdownIt from 'markdown-it'
 
@@ -8,6 +9,7 @@ import iconsprite from './utils/iconsprite.js'
 
 export default async function (config) {
     // Plugins
+    config.addPlugin(EleventyHtmlBasePlugin)
     config.addPlugin(pluginRss)
 
     // Filters
@@ -84,6 +86,7 @@ export default async function (config) {
 
     // Base Config
     return {
+        pathPrefix: '/resume',
         dir: {
             input: 'src',
             output: 'dist',

@@ -1,4 +1,4 @@
-{%- set absolutePageUrl -%}{{ page.url | url | absoluteUrl(meta.url) }}{%- endset -%}
+{%- set absolutePageUrl -%}{{ meta.url }}{{ page.url }}{%- endset -%}
 {%- set pageTitle -%}{{ author.name }}{% if author.occupation %} - {{ author.occupation }}{% endif %}{% if author.location %} in {{ author.location }}{% endif %}{%- endset -%}
 {%- set pageDescription -%}Online Resume of {{ author.name }}{%- endset -%}
 
@@ -18,18 +18,18 @@
 <meta property="og:locale" content="{{ meta.locale }}">
 <meta name="twitter:card" content="summary">
 {%- if author.avatar -%}
-    {%- set avatarUrl -%}/assets/images/{{ author.avatar }}{% endset %}
-    <meta property="og:image" content="{{ avatarUrl | url | absoluteUrl(meta.url) }}">
+    {%- set avatarUrl -%}{{ meta.url }}/assets/images/{{ author.avatar }}{% endset %}
+    <meta property="og:image" content="{{ avatarUrl }}">
 {%- endif -%}
 
 {# Favicon #}
-<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/favicon/apple-touch-icon.png' | url }}">
-<link rel="icon" type="image/png" href="{{ '/assets/images/favicon/favicon-32x32.png' | url }}" sizes="32x32">
-<link rel="icon" type="image/png" href="{{ '/assets/images/favicon/favicon-16x16.png' | url }}" sizes="16x16">
-<link rel="shortcut icon" href="{{ '/assets/images/favicon/favicon.ico' | url }}">
-<link rel="manifest" href="{{ '/site.webmanifest' | url }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/favicon/apple-touch-icon.png' }}">
+<link rel="icon" type="image/png" href="{{ '/assets/images/favicon/favicon-32x32.png' }}" sizes="32x32">
+<link rel="icon" type="image/png" href="{{ '/assets/images/favicon/favicon-16x16.png' }}" sizes="16x16">
+<link rel="shortcut icon" href="{{ '/assets/images/favicon/favicon.ico' }}">
+<link rel="manifest" href="{{ '/site.webmanifest' }}">
 {% if meta.colors.primary %}
-    <link rel="mask-icon" href="{{ '/assets/images/favicon/safari-pinned-tab.svg' | url }}" color="{{ meta.colors.primary }}">
+    <link rel="mask-icon" href="{{ '/assets/images/favicon/safari-pinned-tab.svg' }}" color="{{ meta.colors.primary }}">
     <meta name="theme-color" content="{{ meta.colors.primary }}">
 {% endif %}
 
