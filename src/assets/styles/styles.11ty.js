@@ -27,20 +27,13 @@ export default class {
 
     // Compile Sass to CSS,
     // Embed Source Map in Development
-    async compile(config) {
-        return new Promise((resolve, reject) => {
-            if (!isProd) {
-                config.sourceMap = true
-                config.sourceMapEmbed = true
-                config.outputStyle = 'expanded'
-            }
-            return sass.render(config, (err, result) => {
-                if (err) {
-                    return reject(err)
-                }
-                resolve(result.css.toString())
-            })
-        })
+    async compile(path) {
+        const config = isProd ? {} : {
+            sourceMap: true,
+            sourceMapEmbed: true,
+            outputStyle: 'expanded',
+        }
+        return sass.compileAsync(path, config).then(result => result.css)
     }
 
     // Minify & Optimize with CleanCSS in Production
@@ -105,7 +98,7 @@ export default class {
     // render the CSS file
     async render({ entryPath }) {
         try {
-            const css = await this.compile({ file: entryPath })
+            const css = await this.compile(entryPath)
             const result = await this.minify(css)
             return result
         } catch (err) {
