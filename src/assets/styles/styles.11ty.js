@@ -5,7 +5,7 @@
 const ENTRY_FILE_NAME = 'main.scss'
 
 import path from 'path'
-import sass from 'sass-embedded'
+import * as sass from 'sass-embedded'
 import CleanCSS from 'clean-css'
 import cssesc from 'cssesc'
 const isProd = process.env.ELEVENTY_ENV === 'production'
