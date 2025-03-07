@@ -3,12 +3,12 @@
 
         <div class="actions">
             {% if author.email %}
-                <a class="actions__btn has-tooltip" aria-label="{{ strings.labels.email }}" href="mailto:{{ author.email | obfuscate | safe }}">
+                <a class="actions__btn has-tooltip" aria-label="{{ strings.labels.email }}" href="mailto:{{ author.email | scramble }}" data-scrambled-href>
                     {% icon "email" %}
                 </a>
             {% endif %}
             {% if author.telephone %}
-                <a class="actions__btn has-tooltip" aria-label="{{ strings.labels.telephone }}" href="tel:{{ author.telephone | stripSpaces }}">
+                <a class="actions__btn has-tooltip" aria-label="{{ strings.labels.telephone }}" href="tel:{{ author.telephone | scramble }}" data-scrambled-href>
                     {% icon "telephone" %}
                 </a>
             {% endif %}

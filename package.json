@@ -29,6 +29,7 @@
     "critical": "^7.2.1",
     "cssesc": "^3.0.0",
     "del-cli": "^6.0.0",
+    "email-scramble": "^3.0.0",
     "focus-visible": "^5.2.1",
     "html-minifier-terser": "^7.2.0",
     "lodash": "^4.17.21",

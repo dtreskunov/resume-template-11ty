@@ -3,6 +3,7 @@ import path from 'path'
 import mime from 'mime'
 import { DateTime } from 'luxon'
 import lodash from 'lodash'
+import emailScramble from 'email-scramble'
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -58,4 +59,8 @@ export function themeColors(colors) {
         style += `--secondary-color:${colors.secondary};`
     }
     return style
+}
+
+export function scramble(str) {
+    return emailScramble.encode(str)
 }

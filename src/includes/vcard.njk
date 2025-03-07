@@ -22,15 +22,15 @@
 
         <div class="vcard__contact p-contact">
             {% if author.email %}
-                <a class="vcard__link u-email" aria-label="Email" href="mailto:{{ author.email | obfuscate | safe }}">
+                <a class="vcard__link u-email" aria-label="Email" href="mailto:{{ author.email | scramble }}" data-scrambled-href>
                     {% icon "email" %}
-                    <span class="vcard__link-text">{{ author.email | obfuscate | safe }}</span>
+                    <span class="vcard__link-text" data-scrambled-content>{{ author.email | scramble }}</span>
                 </a>
             {% endif %}
             {% if author.telephone %}
-                <a class="vcard__link p-tel" aria-label="Telephone" href="tel:{{ author.telephone | stripSpaces }}">
+                <a class="vcard__link p-tel" aria-label="Telephone" href="tel:{{ author.telephone | stripSpaces | scramble }}" data-scrambled-href>
                     {% icon "telephone" %}
-                    <span class="vcard__link-text">{{ author.telephone }}</span>
+                    <span class="vcard__link-text" data-scrambled-content>{{ author.telephone | scramble }}</span>
                 </a>
             {% endif %}
             {% if author.website %}
