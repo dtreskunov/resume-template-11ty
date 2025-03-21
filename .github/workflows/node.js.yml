@@ -12,7 +12,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -22,16 +22,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-# Default to bash
-defaults:
-  run:
-    shell: bash
-
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
-    env: {}
     steps:
       - uses: docker://ghcr.io/puppeteer/puppeteer:latest
         with:
