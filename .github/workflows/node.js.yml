@@ -35,7 +35,7 @@ jobs:
       image: ghcr.io/puppeteer/puppeteer:latest
       # volumes:
       #   - ${{ github.workspace }}:/github
-      options: --cpus 1
+      options: --cpus 1 --entrypoint bash
     env: {}
     steps:
       # - run: cd /github
