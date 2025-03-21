@@ -30,9 +30,15 @@ defaults:
 jobs:
   # Build job
   build:
-    runs-on: ghcr.io/puppeteer/puppeteer:latest
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/puppeteer/puppeteer:latest
+      # volumes:
+      #   - ${{ github.workspace }}:/github
+      options: --cpus 1
     env: {}
     steps:
+      # - run: cd /github
       - name: Checkout
         uses: actions/checkout@v4
         with:
