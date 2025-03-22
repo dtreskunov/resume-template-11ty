@@ -6,7 +6,6 @@ const ENTRY_FILE_NAME = 'main.scss'
 
 import path from 'path'
 import * as sass from 'sass-embedded'
-import CleanCSS from 'clean-css'
 import cssesc from 'cssesc'
 const isProd = process.env.ELEVENTY_ENV === 'production'
 
@@ -25,29 +24,27 @@ export default class {
         }
     }
 
-    // Compile Sass to CSS,
-    // Embed Source Map in Development
+    // Compile and minify Sass
     async compile(path) {
-        const config = isProd ? {} : {
+        const compileOptions = isProd ? {
+            sourceMap: false,
+            style: 'compressed',
+        } : {
             sourceMap: true,
-            sourceMapEmbed: true,
-            outputStyle: 'expanded',
+            style: 'expanded',
         }
-        return sass.compileAsync(path, config).then(result => result.css)
+        const compiled = await sass.compileAsync(path, compileOptions)
+        return this.appendSourceMap(compiled)
     }
 
-    // Minify & Optimize with CleanCSS in Production
-    async minify(css) {
-        return new Promise((resolve, reject) => {
-            if (!isProd) {
-                resolve(css)
-            }
-            const minified = new CleanCSS().minify(css)
-            if (!minified.styles) {
-                return reject(minified.error)
-            }
-            resolve(minified.styles)
-        })
+    appendSourceMap(compiled) {
+        if (!compiled.sourceMap) {
+            return compiled.css
+        }
+        const sm = JSON.stringify(compiled.sourceMap)
+        const smBase64 = (Buffer.from(sm, 'utf8') || '').toString('base64')
+        const smComment = '/*# sourceMappingURL=data:application/json;charset=utf-8;base64,' + smBase64 + ' */'
+        return compiled.css + '\n'.repeat(2) + smComment
     }
 
     // display an error overlay when CSS build fails.
@@ -98,9 +95,7 @@ export default class {
     // render the CSS file
     async render({ entryPath }) {
         try {
-            const css = await this.compile(entryPath)
-            const result = await this.minify(css)
-            return result
+            return this.compile(entryPath)
         } catch (err) {
             // if things go wrong
             if (isProd) {

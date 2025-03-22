@@ -10,6 +10,7 @@
     }
     &__url {
         color: variables.$gray;
+        color: var(--gray, variables.$gray);
         font-style: italic;
     }
     &__stats {

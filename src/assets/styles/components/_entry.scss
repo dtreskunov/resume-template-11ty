@@ -12,6 +12,7 @@
 
     &__time {
         color: variables.$gray;
+        color: var(--gray, variables.$gray);
         font-size: 0.875rem;
         letter-spacing: 0.125em;
         text-transform: uppercase;

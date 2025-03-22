@@ -25,9 +25,11 @@ body {
         background-color: var(--primary-color, variables.$primary-color);
     }
     .footer {
+        display: if(variables.$show-footer, unset, none);
         grid-area: footer;
         padding: variables.$spacing-y 0;
         background-color: variables.$gray-light;
+        background-color: var(--gray-light, variables.$gray-light);
     }
 
     @include mixins.mq(lg) {

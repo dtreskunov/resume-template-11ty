@@ -23,14 +23,6 @@ export function dateToISO(date) {
     })
 }
 
-export function obfuscate(str) {
-    const chars = []
-    for (var i = str.length - 1; i >= 0; i--) {
-        chars.unshift(['&#', str[i].charCodeAt(), ';'].join(''))
-    }
-    return chars.join('')
-}
-
 export function stripSpaces(str) {
     return str.replace(/\s/g, '')
 }
@@ -45,20 +37,6 @@ export function base64file(file) {
     const buffer = Buffer.from(fs.readFileSync(filepath))
 
     return `data:${mimeType};base64,${buffer.toString('base64')}`
-}
-
-export function themeColors(colors) {
-    let style = ''
-    if (!colors || lodash.isEmpty(colors)) {
-        return ''
-    }
-    if (colors.primary) {
-        style += `--primary-color:${colors.primary};`
-    }
-    if (colors.secondary) {
-        style += `--secondary-color:${colors.secondary};`
-    }
-    return style
 }
 
 export function scramble(str) {

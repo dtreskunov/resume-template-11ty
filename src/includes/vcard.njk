@@ -4,7 +4,7 @@
         <img class="vcard__avatar u-photo" src="{{ avatarUrl | base64file }}" width="200" height="200" alt="{{ author.name }}" />
     {% endif %}
 
-    <div class="vcard__content">
+    <div class="vcard__content flex-grow">
         <div class="vcard__title">
             <h1 class="p-name">{{ author.name }}</h1>
             {% if author.pronouns %}
@@ -18,8 +18,38 @@
                 <span aria-hidden="true">&middot;</span>
                 <span class="p-locality">{{ author.location }}</span>
             {% endif %}
-        </p> 
+        </p>
 
+        {% if collections.introduction.length %}
+            {% set intro = collections.introduction|first %}
+            <div class="vcard__introduction">
+                {{ intro.templateContent | safe }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="vcard__content vcard__qrcode">
+        <a aria-hidden href="{{ author.website }}">
+            {%- qrCode {margin: 0, errorCorrectionLevel: 'L'} -%}
+                {%- set notes = [[author.occupation, ' in ', author.location] | join] -%}
+                {%- for x in author.social -%}
+                    {%- set notes = notes.concat([x.name, x.url] | join(": ")) -%}
+                {%- endfor -%}
+                {%- set note = notes | join('\n\n') -%}
+                {%- vCard author,
+                    {
+                        fullName: author.name,
+                        jobTitle: author.occupation,
+                        phoneNumber: author.telephone,
+                        url: author.website,
+                        note: note
+                    }
+                -%}
+            {%- endqrCode -%}
+        </a>
+    </div>
+
+    <div class="vcard__content">
         <div class="vcard__contact p-contact">
             {% if author.email %}
                 <a class="vcard__link u-email" aria-label="Email" href="mailto:{{ author.email | scramble }}" data-scrambled-href>
@@ -39,13 +69,12 @@
                     <span class="vcard__link-text">{{ author.website | stripProtocol }}</span>
                 </a>
             {% endif %}
-
+    
             {% if author.social %}
                 <div class="vcard__social">
                     {% for social in author.social %}
                         <a class="vcard__link" href="{{ social.url }}" aria-label="{{ social.name }}" rel="me">
-                            {%- set isSocialIcon = true -%}
-                            {%- icon social.name, isSocialIcon -%}
+                            {%- icon social.name | lower -%}
                             <span class="vcard__link-text p-nickname">{{- social.user -}}</span>
                             <span class="sr-only">on {{ social.name }}</a>
                         </a>

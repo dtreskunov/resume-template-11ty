@@ -9,6 +9,7 @@
         display: block;
         width: 1px;
         background: variables.$gray;
+        background: var(--gray, variables.$gray);
         background: linear-gradient(
             to top,
             rgba(variables.$gray, 0) 0%,

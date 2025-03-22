@@ -1,8 +1,13 @@
+@use "../utils/variables";
+
 @media print {
+    $footer-height: if(variables.$print-footer, 1rem, 0);
+    
     // GENERAL PRINT RESET
 
     @page {
-        margin: 1cm 3cm;
+        margin: variables.$print-page-margin;
+        size: variables.$print-page-size;
     }
 
     :root {
@@ -13,8 +18,11 @@
     body {
         width: 100%;
         min-height: 100%;
-        font-size: 10px !important;
-        overflow: visible;
+        font-size: variables.$print-body-font-size;
+        overflow: hidden;
+        --primary-color: #000000 !important;
+        --secondary-color: #000000 !important;
+        --gray: #000000 !important;
     }
 
     *,
@@ -43,6 +51,7 @@
 
     .layout {
         display: block;
+        padding-bottom: 2 * $footer-height !important;
     }
 
     .container {
@@ -51,8 +60,22 @@
         padding-right: 0;
     }
 
+    .entry__content {
+        max-width: none !important;
+        text-align: justify;
+
+        a {
+            font-weight: bold;
+        }
+
+        * > * {
+            margin-top: 0.5em;
+        }
+    }
+
     .header {
         padding: 0 !important;
+        margin-bottom: 1rem;
     }
 
     .sidebar {
@@ -60,29 +83,95 @@
     }
 
     .footer {
+        display: if(variables.$print-footer, unset, none !important);
         background: transparent !important;
+        position: absolute !important;
+        bottom: $footer-height !important;
+        width: 100% !important;
+        height: $footer-height !important;
+        padding: 0 !important;
     }
 
     .section__title {
-        border-color: #b5b5b5;
-    }
-
-    .vcard__avatar {
-        position: static !important;
-        transform: none !important;
-        margin: 0 2rem 0 0 !important;
-        border: 0;
+        margin-bottom: 0.5rem;
     }
 
     .entrylist::before,
     .entrylist__item::before,
     .bulletlist li::before {
+        content: none; // get rid of time line with red dots
         color-adjust: exact !important;
         -webkit-print-color-adjust: exact !important;
     }
 
     .entrylist__item,
     .entry {
+        widows: 3;
+        orphans: 3;
+        padding: 0;
         page-break-inside: avoid;
+    }
+
+    main {
+        column-count: variables.$print-main-column-count;
+        column-gap: variables.$print-main-column-gap;
+    }
+
+    .vcard {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding-top: 0;
+        padding-left: 0;
+        padding-bottom: 2.5rem;
+
+        &__social {
+            display: inline-flex;
+        }
+        &__content {
+            max-width: 25ch;
+            padding-top: 0;
+        }
+        &__qrcode {
+            display: block;
+            max-width: 25ch;
+        }
+        &__avatar {
+            display: none;
+        }
+    }
+    
+    section {
+        padding-top: 0 !important;
+        page-break-inside: auto !important;
+    }
+
+    .entrylist {
+        padding-left: 0 !important;
+    }
+
+    .flex-grow {
+        flex-grow: 1;
+        max-width: none;
+    }
+    .lead {
+        max-width: none;
+    }
+    .vcard {
+        flex-wrap: nowrap;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    // not sure why this is needed when using "sprite" mode instead of "inline"
+    svg.icon > use {
+        transform: scale(0.66);
     }
 }

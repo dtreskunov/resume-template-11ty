@@ -6,4 +6,8 @@
     vertical-align: middle;
     fill: currentColor;
     pointer-events: none;
+
+    &.no-fill {
+        fill: none;
+    }
 }

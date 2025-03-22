@@ -15,7 +15,6 @@
 // partials with global scope
 //--------------------
 
-@use 'base/fonts';
 @use 'base/normalize';
 @use 'base/reboot';
 @use 'base/layout';
@@ -24,6 +23,7 @@
 @use 'base/utilities';
 @use 'base/screenreader';
 @use 'base/animation';
+@use 'base/scrambled';
 
 //--------------------
 // COMPONENTS

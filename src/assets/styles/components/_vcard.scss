@@ -3,6 +3,7 @@
 
 .vcard {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     position: relative;
 
@@ -26,10 +27,22 @@
         box-shadow: variables.$box-shadow-elevated;
         margin-right: variables.$spacing-x;
     }
+    &__qrcode {
+        width: 10rem;
+        height: 10rem;
+        flex: 0 0 10rem;
+        margin-right: variables.$spacing-x;
+        display: none;
+    }
+    &__qrcode svg path[stroke="#000000"] {
+        stroke: variables.$primary-color;
+        stroke: var(--primary-color, variables.$primary-color);
+    }
     &__pronouns {
         font-size: 1.125rem;
         font-family: variables.$font-family-serif;
         color: variables.$gray;
+        color: var(--gray, variables.$gray);
     }
     &__link {
         display: flex;
@@ -47,6 +60,9 @@
         .icon {
             margin-right: 0.125em;
         }
+    }
+    &__introduction {
+        font-size: 1.125rem;
     }
 
     @include mixins.mq(md) {

@@ -11,6 +11,7 @@
         "telephone": "Telephone",
         "print": "Print Résumé",
         "present": "Present",
-        "lastUpdated": "Last updated"
+        "lastUpdated": "Last updated",
+        "downloadPdf": "Download PDF"
     }
 }

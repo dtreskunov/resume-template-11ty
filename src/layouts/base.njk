@@ -2,12 +2,10 @@
 <html class="no-js" lang="{{ meta.lang }}">
 <head>
     {% include "meta.njk" %}
-    <link rel="preload" href="{{ '/assets/fonts/butler-medium.woff2' }}" as="font" type="font/woff2" crossorigin>
+    {% localizeFontsCss "/assets/fonts/libre-baskerville/font.css", "https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" %}
     <link rel="stylesheet" href="{{ '/assets/styles/main.css' }}">
 </head>
-<body {% if meta.colors %}style="{{ meta.colors | themeColors }}"{% endif %}>
-    <div data-icon-sprite hidden>{% iconsprite %}</div>
-
+<body style="{{ additionalCss }}">
     <div class="layout h-resume" role="document">
         {% include "header.njk" %}
         {{ content | safe }}
@@ -15,6 +13,7 @@
         {% include "footer.njk" %}
     </div>
 
+    {% svgSprite %}
     <script type="text/javascript" src="{{ '/assets/scripts/main.js' }}"></script>
     <!--! LAST BUILD: {{ build.env}} {{ build.timestamp | dateToISO }} -->
 </body>

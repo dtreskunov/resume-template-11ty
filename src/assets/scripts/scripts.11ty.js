@@ -34,7 +34,7 @@ export default class {
                         plugins: ['@babel/plugin-transform-runtime']
                     }
                 }
-            }
+            },
         ]
 
         // pass environment down to scripts
@@ -45,10 +45,11 @@ export default class {
         // Main Config
         const webpackConfig = {
             mode: isProd ? 'production' : 'development',
+            devtool: isProd ? false : 'inline-source-map', // https://webpack.js.org/configuration/devtool/
             entry: entryPath,
             output: { path: outputPath },
             module: { rules },
-            plugins: [envPlugin]
+            plugins: [envPlugin],
         }
 
         return {
@@ -58,10 +59,13 @@ export default class {
         }
     }
 
-    // Compile JS with Webpack, write the result to Memory Filesystem.
-    // this brilliant idea is taken from Mike Riethmuller / Supermaya
-    // @see https://github.com/MadeByMike/supermaya/blob/master/site/utils/compile-webpack.js
-    compile(webpackConfig) {
+    /**
+    Compile JS with Webpack, write the result to Memory Filesystem.
+    this brilliant idea is taken from Mike Riethmuller / Supermaya
+    @see https://github.com/MadeByMike/supermaya/blob/master/site/utils/compile-webpack.js
+    @param {import('webpack').Configuration} webpackConfig
+    */
+    async compile(webpackConfig) {
         const compiler = webpack(webpackConfig)
         compiler.outputFileSystem = mfs
         compiler.inputFileSystem = fs
@@ -93,8 +97,7 @@ export default class {
     // render the JS file
     async render({ webpackConfig }) {
         try {
-            const result = await this.compile(webpackConfig)
-            return result
+            return this.compile(webpackConfig)
         } catch (err) {
             console.log(err)
             return null

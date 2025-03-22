@@ -26,6 +26,7 @@
         font-size: 1rem;
         transform: translateX(-50%);
         background-color: variables.$gray-darkest;
+        background-color: var(--gray-darkest, variables.$gray-darkest);
         color: #fff;
         border-radius: 0 0 0.5rem 0.5rem;
         padding: 1rem 1.5rem;

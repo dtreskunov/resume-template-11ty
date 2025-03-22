@@ -9,7 +9,9 @@
     &__title {
         margin-bottom: variables.$spacing-y;
         padding-bottom: 0.5rem;
-        border-bottom: 1px solid variables.$gray;
+        border-bottom: 1px solid;
+        border-color: variables.$gray;
+        border-color: var(--gray, variables.$gray);
     }
 }
 

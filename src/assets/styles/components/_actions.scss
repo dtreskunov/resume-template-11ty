@@ -22,7 +22,7 @@
     }
 
     @include mixins.mq(lg) {
-        display: none;
+        display: block;
         flex-direction: column;
         position: fixed;
         top: 220px;

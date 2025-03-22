@@ -1,4 +1,4 @@
-{% if repositories.length %}
+{# icons are commented out because there is some bug that makes this entire section empty #}
 <ol class="repolist">
     {% for repo in repositories.slice(0, 5) %}
         <li class="repolist__item">
@@ -8,10 +8,9 @@
                 <p class="repolist__desc">{{ repo.description }}</p>
             {% endif %}
             <div class="repolist__stats">
-                <p>{%- icon "star" -%}{{ repo.stargazers_count }}<span class="sr-only"> stars</span></p>
-                <p>{%- icon "fork" -%}{{ repo.forks_count }}<span class="sr-only"> forks</span></p>
+                <p>{#%- icon "star" -%#}Stars: {{ repo.stargazers_count }}<span class="sr-only"> stars</span></p>
+                <p>{#%- icon "fork" -%#}Forks: {{ repo.forks_count }}<span class="sr-only"> forks</span></p>
             </div>
         </li>
     {% endfor %}
 </ol>
-{% endif %}

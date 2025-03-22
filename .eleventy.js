@@ -1,34 +1,64 @@
 import { EleventyHtmlBasePlugin } from '@11ty/eleventy'
 import pluginRss from '@11ty/eleventy-plugin-rss'
 import markdownIt from 'markdown-it'
+import pluginIcons from 'eleventy-plugin-icons'
 
 import * as filters from './utils/filters.js'
 import * as transforms from './utils/transforms.js'
 import * as shortcodes from './utils/shortcodes.js'
-import iconsprite from './utils/iconsprite.js'
+import exportToPdf from './utils/plugins/exportToPdf.js'
+import localizeFontsCss from './utils/plugins/localizeFontsCss.js'
 
+import meta from './src/data/meta.json' with { type: 'json' };
+
+/**
+ * @param {import('@11ty/eleventy').UserConfig} config 
+ */
 export default async function (config) {
+    const BASE_URL = new URL(meta.url)
+    const PATH_PREFIX = BASE_URL.pathname
+
     // Plugins
     config.addPlugin(EleventyHtmlBasePlugin)
     config.addPlugin(pluginRss)
 
+    config.addPlugin(pluginIcons, {
+        mode: 'sprite',
+        sources: [
+            {name: 'custom', path: 'src/assets/icons', default: true},
+            {name: 'tabler', path: 'node_modules/@tabler/icons/icons'},
+        ],
+        sprite: {
+            shortcode: 'svgSprite',
+            writeFile: 'assets/images/icons.svg',
+            attributes: {
+                'class': 'svg-sprite',
+                'aria-hidden': true,
+                'style': 'display:none',
+            },
+        },
+    })
+    config.addPlugin(exportToPdf)
+    config.addPlugin(localizeFontsCss)
+
     // Filters
-    Object.keys(filters).forEach((filterName) => {
-        config.addFilter(filterName, filters[filterName])
+    Object.entries(filters).forEach(([filterName, filter]) => {
+        config.addFilter(filterName, filter)
     })
 
     // Transforms
-    Object.keys(transforms).forEach((transformName) => {
-        config.addTransform(transformName, transforms[transformName])
+    Object.entries(transforms).forEach(([transformName, transform]) => {
+        config.addTransform(transformName, transform)
     })
 
     // Shortcodes
-    Object.entries(shortcodes).forEach(([shortcodeName, func]) => {
-        config.addShortcode(shortcodeName, func)
+    Object.entries(shortcodes).forEach(([shortcodeName, shortcode]) => {
+        if (shortcode.paired) {
+            config.addPairedShortcode(shortcodeName, shortcode)
+        } else {
+            config.addShortcode(shortcodeName, shortcode)
+        }
     })
-
-    // Icon Sprite
-    config.addNunjucksAsyncShortcode('iconsprite', iconsprite)
 
     // Asset Watch Targets
     config.addWatchTarget('./src/assets')
@@ -84,9 +114,18 @@ export default async function (config) {
         dynamicPartials: false,
     });
 
+    const cssVariables = {
+        'path-prefix': PATH_PREFIX,
+        'primary-color': meta.colors.primary,
+        'secondary-color': meta.colors.secondary
+    }
+    config.addGlobalData('additionalCss', Object.entries(cssVariables)
+        .map( ([name, val]) => `--${name}:${val}` ).join(';'))
+    // config.addGlobalData('pathPrefix', PATH_PREFIX)
+
     // Base Config
     return {
-        pathPrefix: '/resume',
+        pathPrefix: PATH_PREFIX,
         dir: {
             input: 'src',
             output: 'dist',

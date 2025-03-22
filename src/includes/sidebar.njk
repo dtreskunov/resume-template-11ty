@@ -12,6 +12,9 @@
                     {% icon "telephone" %}
                 </a>
             {% endif %}
+            <a class="actions__btn has-tooltip" aria-label="{{ strings.labels.downloadPdf }}" href="/resume.pdf">
+                {% icon "tabler:outline/pdf", {"class": "no-fill"} %}
+            </a>
             <button class="actions__btn js-print utl-screen-only has-tooltip" aria-label="{{ strings.labels.print }}">
                 {% icon "print" %}
             </button>

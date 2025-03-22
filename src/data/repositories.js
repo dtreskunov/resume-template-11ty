@@ -1,4 +1,4 @@
-import Cache from '@11ty/eleventy-cache-assets'
+import Fetch from '@11ty/eleventy-fetch'
 import lodash from 'lodash'
 
 // if you want to display your most starred github repositories,
@@ -12,7 +12,7 @@ export default async function () {
 
     try {
         console.log('Fetching GitHub repos...')
-        const repos = await Cache(
+        const repos = await Fetch(
             `https://api.github.com/users/${YOUR_GITHUB_USERNAME}/repos`,
             {
                 duration: '1d',
