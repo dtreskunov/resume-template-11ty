@@ -66,7 +66,12 @@ export default function(eleventyConfig) {
             const server = await serve({root: outputDir, baseDir: pathPrefix})
 
             // Launch the browser and open a new blank page
-            const browser = await puppeteer.launch()
+            const browser = await puppeteer.launch({
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox'
+                ]
+            })
             const page = await browser.newPage()
 
             const errors = []
