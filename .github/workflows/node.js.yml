@@ -5,8 +5,6 @@ name: Deploy site to GitHub Pages
 on:
   # Runs on pushes
   push:
-    branches:
-      - "**"
     branches-ignore:
       - gh-pages
 
