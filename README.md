@@ -1,6 +1,6 @@
 # Resume
 
-An online résumé. [Demo Site](https://dtreskunov.github.io/resume-template-11ty)  
+An online résumé template. [Demo Site](https://dtreskunov.github.io/resume-template)
 
 ## Features
 
@@ -12,30 +12,24 @@ An online résumé. [Demo Site](https://dtreskunov.github.io/resume-template-11t
 * Search Engine Optimized (meta, JSON-LD, etc...)
 * Critical CSS Inlined
 * Print Styles
-* Printed version gets exported to PDF
-* Contact info encoded in printed QR code
-* Fonts fetched and bundled from [Google Fonts](https://fonts.google.com/)
-* Email and phone are scrambled to protect against spam
+* **NEW** PDF version is built automatically
+* **NEW** Contact info encoded in QR code included in the print version
+* **NEW** Fonts fetched and bundled from [Google Fonts](https://fonts.google.com/)
+* **NEW** Email and phone are scrambled to protect against spam
 
 ## Getting Started
 
-To install the necessary packages, run this command in the root folder of the site:
+1. Fork this repository.
+1. Edit `src/data/meta.json` to adjust `url` according to your GitHub username and the name of your forked repository.
+1. After a minute or two, the site will be built automatically.
+1. To enable GitHub Pages, go to the **Settings** tab, then **Pages**, then choose `gh-pages` where it says "Select a source below to enable GitHub Pages for this repository."
+1. The site will be live at `<your-github-username>.github.io/<forked-repository-name>`
 
-```
-npm install
-```
+## Development
 
-__Commands__  
-
+* Run `npm install` to install the necessary packages
 * Run `npm start` for a development server and live reloading
 * Run `npm run build` to generate a production build
-
-Deploy a fork of this template to Netlify:
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/maxboeck/resume) 
-
-...or to GitHub Pages via the [included workflow](/blob/main/.github/workflows/node.js.yml)
-
 
 ## Customize your Résumé
 
@@ -191,7 +185,7 @@ Supported properties are:
     <tbody>
         <tr>
             <td><code>url</code></td>
-            <td>the URL of your hosted résumé, e.g. <code>"https://my-resume.com"</code>. (no trailing slash)</td>
+            <td>the URL of your hosted résumé, e.g. <code>"https://my-resume.com/resume"</code>.</td>
             <td>required</td>
         </tr>
         <tr>
@@ -216,6 +210,9 @@ Supported properties are:
         </tr>
     </tbody>
 </table>
+
+This template will create a PDF file by opening a virtual Chrome browser and using the "Print to PDF" feature.
+To adjust printable features, such as orientation, column count, font size, etc. edit `src/assets/styles/utils/_variables.scss`.
 
 ### 7. Internationalization
 
