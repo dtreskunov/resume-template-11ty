@@ -2,6 +2,8 @@
 
 An online résumé template. [Demo Site](https://dtreskunov.github.io/resume-template)
 
+![a preview of the generated résumé as a website and in print](src/assets/images/demo/resume.png)
+
 ## Features
 
 * Fully Customizable
